@@ -15,26 +15,39 @@ pushing stay local.
    on Ada's machine               cursors, who is online)              on Bob's machine
 ```
 
-## Deploy (in the browser, about two minutes)
+## Deploy (in the browser)
 
-[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/abdussamiakanda/gitlatex-collab)
+You need a Cloudflare account (the free plan is enough) and a GitHub account.
+Nothing to install, no terminal.
 
-1. Click the button and sign in to Cloudflare (a free account is enough). It
-   also asks you to connect GitHub or GitLab, where it makes your own copy of
-   this repository.
-2. On the setup page, keep the defaults or rename the Worker, and enter an
-   **ADMIN_TOKEN**: a long random string that only you, the owner, know. It
-   lets you create rooms; your co-authors never need it.
-3. Click **Create and deploy**. When it finishes, the page shows the address,
-   e.g. `https://gitlatex-collab.<you>.workers.dev`.
+1. **Connect GitHub to Cloudflare first.** In the
+   [Cloudflare dashboard](https://dash.cloudflare.com/?to=/:account/workers-and-pages/create),
+   go to **Workers & Pages → Create application → Connect to Git**, click
+   **+ Add account**, and **Install & Authorize** the *Cloudflare Workers and
+   Pages* GitHub app. Once your GitHub account is listed, you can leave that
+   page.
+2. **Generate an admin token**: a long random string that only you know. In
+   GitLaTeX, **Live collaboration → Host** (or **Settings → Collaboration**)
+   has a **Generate admin token** button; a password manager works too.
+3. **Click the button below**, paste the token as **ADMIN_TOKEN**, and click
+   **Create and deploy**. Cloudflare copies this repository into your GitHub
+   account and builds it, which takes a minute or two.
+
+   [![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/abdussamiakanda/gitlatex-collab)
+
+4. **Turn on the workers.dev address.** When the deploy has finished, open
+   **Workers & Pages**, select the Worker (`gitlatex-collab` unless you renamed
+   it), go to **Settings → Domains & Routes**, and enable **workers.dev**. The
+   address it shows, e.g. `https://gitlatex-collab.<your-subdomain>.workers.dev`,
+   is your relay.
 
 Then, in GitLaTeX:
 
 1. **You (the owner):** open the project, then **Live collaboration** in the left
-   sidebar → **Host**. Enter the relay address and your admin token, and click
-   **Create room & go live**. The room is named after the project, and the
-   relay generates a token for it. Copy the **invite** from the panel and send
-   it to your co-authors.
+   sidebar → **Host**. Enter the relay address and your admin token, click
+   **Connect**, then **Create room & go live**. The room is named after the
+   project, and the relay generates a token for it. Copy the **invite** from
+   the panel and send it to your co-authors.
 2. **Your co-authors:** open their copy of the project, then **Live
    collaboration** → **Join**, and paste the invite. Nothing to deploy.
 
@@ -43,8 +56,9 @@ and token, so an invite only opens the project it was made for. From the same
 panel you can copy a room's invite again, issue a new token (everyone is
 disconnected until they get the new invite) or delete a room.
 
-To change the admin token later: Cloudflare dashboard → **Workers & Pages** →
-your Worker → **Settings** → **Variables and Secrets**.
+To change the admin token later: the Worker's **Settings → Variables and
+Secrets** in the Cloudflare dashboard. Then sign in again in GitLaTeX with the
+new one.
 
 ### From a terminal instead
 
@@ -65,7 +79,7 @@ echo "ADMIN_TOKEN=dev-admin" > .dev.vars
 npx wrangler dev                         # ws://localhost:8787
 ```
 
-Use `localhost:8787` as the server in GitLaTeX.
+Use `localhost:8787` as the relay address in GitLaTeX.
 
 ## API
 
