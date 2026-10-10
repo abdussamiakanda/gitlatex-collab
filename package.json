@@ -26,8 +26,8 @@
   },
   "cloudflare": {
     "bindings": {
-      "ROOM_TOKEN": {
-        "description": "The shared secret your co-authors enter in GitLaTeX to join a room. Choose a long random string, e.g. from a password manager. Anyone with it can join any room on this relay."
+      "ADMIN_TOKEN": {
+        "description": "Your owner password for this relay. In GitLaTeX, **Live collaboration → Host** uses it to create a room for each project; the relay then generates that room's own token for you to share with co-authors. Choose a long random string (e.g. from a password manager) and keep it to yourself."
       }
     }
   }

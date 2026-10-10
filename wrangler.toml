@@ -2,10 +2,20 @@ name = "gitlatex-collab"
 main = "src/index.ts"
 compatibility_date = "2026-09-01"
 
+# One Durable Object per room (the shared document), and one registry that
+# holds the rooms and their tokens.
 [[durable_objects.bindings]]
 name = "Collab"
 class_name = "Collab"
 
+[[durable_objects.bindings]]
+name = "Registry"
+class_name = "Registry"
+
 [[migrations]]
 tag = "v1"
 new_sqlite_classes = ["Collab"]
+
+[[migrations]]
+tag = "v2"
+new_sqlite_classes = ["Registry"]
