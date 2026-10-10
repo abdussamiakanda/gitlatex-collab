@@ -52,8 +52,9 @@ Then, in GitLaTeX:
    collaboration** → **Join**, and paste the invite. Nothing to deploy.
 
 Everyone appears under their git `user.name`. Each project gets its own room
-and token, so an invite only opens the project it was made for. From the same
-panel you can copy a room's invite again, issue a new token (everyone is
+and token, so an invite only opens the project it was made for. The panel
+shows the open project's room, and **Settings → Collaboration** lists them all;
+from either you can copy a room's invite again, issue a new token (everyone is
 disconnected until they get the new invite) or delete a room.
 
 To change the admin token later: the Worker's **Settings → Variables and
